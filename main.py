@@ -50,12 +50,12 @@ class prediction(Resource):
             classes = model.predict(img_test, batch_size=50)
             print(classes[0])
             if classes[0] < 0.5:
-                hasil = '{"hasil":1}'
+                hasil = '{"hasil":"Normal"}'
                 hasil_json = json.loads(hasil)
                 os.remove(filename)
                 return hasil_json
             else:
-                hasil = '{"hasil":0}'
+                hasil = '{"hasil":"positif covid"}'
                 hasil_json = json.loads(hasil)
                 os.remove(filename)
                 return hasil_json
