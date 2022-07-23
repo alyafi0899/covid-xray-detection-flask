@@ -94,7 +94,7 @@ pydeck==0.7.1
 Pygments==2.12.0
 Pympler==1.0.1
 pyparsing==3.0.9
-Pyrebase==2.11.1
+Pyrebase==3.0.27
 pyrsistent==0.18.1
 python-dateutil==2.8.2
 python-jwt==2.0.1
