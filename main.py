@@ -4,11 +4,13 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from tensorflow.keras.utils import img_to_array
 import json
-from flask import Flask, request
+from flask import Flask
 from flask_restful import Resource, Api
 from flask_cors import CORS
 import os
 import pyrebase
+
+
 
 app = Flask(__name__)
 #
@@ -38,6 +40,7 @@ class prediction(Resource):
         storage.child(path_cloud).download(filename)
 
         if os.path.exists(files):
+
             model = load_model('trained_model.h5')
             img = tf.keras.utils.load_img(filename, target_size=(500, 500))
 
@@ -54,19 +57,20 @@ class prediction(Resource):
                 hasil_json = json.loads(hasil)
                 os.remove(filename)
                 return hasil_json
+
             else:
                 hasil = '{"hasil":"positif covid"}'
                 hasil_json = json.loads(hasil)
                 os.remove(filename)
                 return hasil_json
 
+
         else:
             hasil = '{"hasil":"File Tidak ada"}'
             hasil_json = json.loads(hasil)
             return hasil_json
 
-
 api.add_resource(prediction, '/prediction/<string:files>')
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000 )
+    app.run()
