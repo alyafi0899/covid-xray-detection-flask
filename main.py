@@ -1,7 +1,6 @@
 from keras.models import load_model
 import numpy as np
 import tensorflow as tf
-import matplotlib.pyplot as plt
 from tensorflow.keras.utils import img_to_array
 import json
 from flask import Flask
@@ -44,8 +43,6 @@ class prediction(Resource):
             model = load_model('trained_model.h5')
             img = tf.keras.utils.load_img(filename, target_size=(500, 500))
 
-            plt.figure(figsize=(10, 10))
-            plt.imshow(img)
             x = img_to_array(img)
             x /= 255
             img_test = np.expand_dims(x, axis=0)
