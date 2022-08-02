@@ -8,7 +8,7 @@ from flask_restful import Resource, Api
 from flask_cors import CORS
 import os
 import pyrebase
-#from waitress import serve
+from waitress import serve
 
 
 
@@ -70,6 +70,6 @@ class prediction(Resource):
 
 api.add_resource(prediction, '/prediction/<string:files>')
 
-if __name__ == '__main__':
-     app.run(host="0.0.0.0", port=3000, debug=True)
-#serve(app, host='0.0.0.0', port=8080, threads=1)
+# if __name__ == '__main__':
+#      app.run(host="0.0.0.0", port=3000, debug=True)
+serve(app, host='0.0.0.0', port=8080, threads=1)
