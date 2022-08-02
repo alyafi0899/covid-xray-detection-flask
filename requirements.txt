@@ -5,5 +5,4 @@ gunicorn==20.1.0
 keras==2.9.0
 Keras-Preprocessing==1.1.2
 numpy==1.23.1
-Pyrebase==3.0.27
 tensorflow==2.9.1
