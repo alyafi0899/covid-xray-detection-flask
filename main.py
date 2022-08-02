@@ -1,7 +1,7 @@
 from keras.models import load_model
 import numpy as np
-import tensorflow as tf
-from tensorflow.keras.utils import img_to_array
+import keras
+from keras.utils import img_to_array
 import json
 from flask import Flask
 from flask_restful import Resource, Api
@@ -41,7 +41,7 @@ class prediction(Resource):
         if os.path.exists(files):
 
             model = load_model('trained_model.h5')
-            img = tf.keras.utils.load_img(filename, target_size=(500, 500))
+            img = keras.utils.load_img(filename, target_size=(500, 500))
 
             x = img_to_array(img)
             x /= 255
