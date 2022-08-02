@@ -71,5 +71,5 @@ class prediction(Resource):
 api.add_resource(prediction, '/prediction/<string:files>')
 
 # if __name__ == '__main__':
-#     app.run(host="0.0.0.0", port=5000)
-serve(app, host='0.0.0.0', port=8080, threads=1)
+     app.run(host="0.0.0.0", port=3000)
+#serve(app, host='0.0.0.0', port=8080, threads=1)
