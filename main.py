@@ -1,7 +1,7 @@
 from keras.models import load_model
 import numpy as np
 import keras
-from keras.utils import img_to_array
+from tensorflow.keras.utils import img_to_array
 import json
 from flask import Flask
 from flask_restful import Resource, Api
