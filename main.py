@@ -8,6 +8,8 @@ from flask_restful import Resource, Api
 from flask_cors import CORS
 import os
 import pyrebase
+
+
 from waitress import serve
 
 
@@ -32,15 +34,16 @@ class prediction(Resource):
             "measurementId": "G-24HVPLE5B6"
         }
 
-        firebase_storage = pyrebase.initialize_app(config)
-        storage = firebase_storage.storage()
+        firebase = pyrebase.initialize_app(config)
+        storage = firebase.storage()
+        db = firebase.database()
+#=============================================================
 
         filename = files
         path_cloud = f"files/{filename}"
         storage.child(path_cloud).download(filename)
 
-        if os.path.exists(files):
-
+        if os.path.exists(filename):
             model = load_model('trained_model.h5')
             img = keras.utils.load_img(filename, target_size=(500, 500))
 
@@ -50,6 +53,7 @@ class prediction(Resource):
 
             classes = model.predict(img_test, batch_size=50)
             print(classes[0])
+
             if classes[0] < 0.5:
                 hasil = '{"hasil":"Normal"}'
                 hasil_json = json.loads(hasil)
@@ -61,8 +65,6 @@ class prediction(Resource):
                 hasil_json = json.loads(hasil)
                 os.remove(filename)
                 return hasil_json
-
-
         else:
             hasil = '{"hasil":"File Tidak ada"}'
             hasil_json = json.loads(hasil)
@@ -70,6 +72,6 @@ class prediction(Resource):
 
 api.add_resource(prediction, '/prediction/<string:files>')
 
-# if __name__ == '__main__':
-#      app.run(host="0.0.0.0", port=3000, debug=True)
-serve(app, host='0.0.0.0', port=8080, threads=1)
+if __name__ == '__main__':
+      app.run(host="0.0.0.0", port=3000, debug=True)
+# serve(app, host='0.0.0.0', port=8080, threads=1)
