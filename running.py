@@ -34,7 +34,6 @@ while True:
     path_cloud = f"files/{filename}"
     if trigger is True:
             storage.child(path_cloud).download(filename)
-            print("asd")
             if os.path.exists(filename) and trigger==True:
                         model = load_model('trained_model.h5')
                         img = keras.utils.load_img(filename, target_size=(500, 500))
